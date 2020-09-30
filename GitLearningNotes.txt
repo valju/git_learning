@@ -1,0 +1,87 @@
+			GIT LEARNING NOTES 2020
+                        =======================
+
+RCS was created in 1982, CVS was released in 1990, Subversion was released in 2000, and Git was initially released in 2005
+
+
+git config user.name "Another Genius"
+git config user.email "b_genius@linux.com"
+
+
+
+git add -i   // for interactive choosing of files to stage, 
+git add -u   // to update only files already known to git
+
+git rm myfile // from wd and index
+git rm myfile --cached   //.from wd and staged changes
+
+git mv   // better than remove and add
+
+trees - blobs - commits (- tags optionally, human-friendly names of project history moments)
+
+the index contains a complete picture of the state of a project at a given time
+
+file(s) is added as blobs to the object store and adds references to the new blobs in the index, by sha1 hash
+
+HEAD in the current branch points to new commit object after commit
+
+160-bit 40-character hexadecimal sha1 hash value, or use first six characters =already 16^6=> 1/16.77 million chance of clashes. "so that the reference is unique"
+ 
+----
+
+
+du -shc .git
+git prune -n
+git prune
+
+git status
+
+git diff // to see the differences between your working project files and what is in the repository.
+// BETTER? will show all differences between your staged working directories and what has been previously committed
+
+git ls-files
+git ls-files --others --exclude-standard
+
+git log | grep "^commit" | head -10
+git log --pretty=oneline
+
+git blame -L 3107,3121 kernel/sched/core.c
+
+diff -r my_cvs_repo diffutils/
+Only in diffutils/: CVS
+Only in my_cvs_repo: .git
+
+---------
+
+forking - git clone
+branching - git checkout -b newbranch
+or
+git branch work  // creates a new branched copy of current branch, but stays on current branch?
+------
+
+git tag     //creates a tag or annotated tag (a text string that references a commit object). The tag is placed in .git/refs/tags unless it is an annotated tag, in which case, the tag is created as an object in the object store (changes induced by git tag):
+
+.gitignore
+
+There can be .gitignore files in each subdirectory, with rules applying recursively and thus incrementally
+
+*.ko                  # normally ignore .ko files,
+!my_driver.ko         # but override that and include my_driver.ko to repository
+OR: When you commit, you'll have to use a "-f" option to explicitly force that file to be added. So, that's a little bit about how git classifies files.
+
+---
+$ git bisect start
+$ git bisect bad
+$ git bisect good V_10
+..git bisect good/bad until you find the bug, then   
+git bisect reset
+
+OR: git bisect run ./myscript.sh 
+
+You can replay the bisection history with git bisect log or git bisect visualize
+- - -
+
+git revert commit_name  // if risk someone else pulled
+git reset --hard HEAD~2        // if working alone
+
+git restore // You can easily remove all the working files in your project, and then just simply restore them with a "git restore" command just totally from that .git directory.
