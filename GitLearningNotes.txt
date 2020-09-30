@@ -38,6 +38,8 @@ git status
 
 git diff // to see the differences between your working project files and what is in the repository.
 // BETTER? will show all differences between your staged working directories and what has been previously committed
+git diff --cached earlier_commit_name
+git diff one_commit another_commit
 
 git ls-files
 git ls-files --others --exclude-standard
@@ -87,12 +89,34 @@ OR: git bisect run ./myscript.sh
 
 You can replay the bisection history with git bisect log or git bisect visualize
 - - -
+git show sprint2:src/myfile.js
+git checkout sprint2 src/myfile.js
 
 git revert commit_name  // if risk someone else pulled
 git reset --hard HEAD~2        // if working alone
 
 git restore // You can easily remove all the working files in your project, and then just simply restore them with a "git restore" command just totally from that .git directory.
 
+REBASING, first with merge
+o--o--O--o--o--o <-- origin
+        \        \
+         a--b--c--m <-- mywork
+
+... second IF we use instead:   git rebase origin
+o--o--O--o--o--o <-- origin
+                 \
+                  a'--b'--c' <-- mywork
+
+git checkout -b development origin  // Here development is a lone coders private branch!!
+git checkout development
+git rebase master development   // Rebasing 'merges' but looses history of the dev branch
+...solve conflicts...
+...add changed files...
+git rebase --continue    OR    git rebase --abort
+---
+Conflict resolution:
+a) modify the conflicting files and commit once again.
+b) git reset and modify either branch
 ---
 SHELL SCRIPT EXAMPLES
 n=0
@@ -105,3 +129,6 @@ while [ $n -lt 5 ] ; do
     fi
     echo I created file: $file , if it was 4th one, it has text line BAD added to it.
 done
+--
+
+bare repository? Are e.g. BitBucket and GitHub repos bare repositories? Maybe not as people can (maybe shouldn't, but can) edit locally in GitHub too.
