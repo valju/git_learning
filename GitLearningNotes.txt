@@ -44,6 +44,9 @@ git ls-files --others --exclude-standard
 
 git log | grep "^commit" | head -10
 git log --pretty=oneline
+git log -p
+git log --numstat
+
 
 git blame -L 3107,3121 kernel/sched/core.c
 
@@ -56,7 +59,11 @@ Only in my_cvs_repo: .git
 forking - git clone
 branching - git checkout -b newbranch
 or
-git branch work  // creates a new branched copy of current branch, but stays on current branch?
+git branch work  // creates a new branched copy of current branch, but stays on current branch
+git branch -d work
+
+git show-branch
+git branch
 ------
 
 git tag     //creates a tag or annotated tag (a text string that references a commit object). The tag is placed in .git/refs/tags unless it is an annotated tag, in which case, the tag is created as an object in the object store (changes induced by git tag):
@@ -85,3 +92,16 @@ git revert commit_name  // if risk someone else pulled
 git reset --hard HEAD~2        // if working alone
 
 git restore // You can easily remove all the working files in your project, and then just simply restore them with a "git restore" command just totally from that .git directory.
+
+---
+SHELL SCRIPT EXAMPLES
+n=0
+while [ $n -lt 5 ] ; do
+    n=$(($n+1))
+    file=file$n
+    echo file > $file
+    if [ "$n" == "4" ] ; then 
+	echo BAD >> $file  
+    fi
+    echo I created file: $file , if it was 4th one, it has text line BAD added to it.
+done
