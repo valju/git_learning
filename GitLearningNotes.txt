@@ -97,12 +97,13 @@ git reset --hard HEAD~2        // if working alone
 
 git restore // You can easily remove all the working files in your project, and then just simply restore them with a "git restore" command just totally from that .git directory.
 
-REBASING, first with merge
+REBASING https://mirrors.edge.kernel.org/pub/software/scm/git/docs/user-manual.html#using-git-rebase 
+, first with more tradional = merge
 o--o--O--o--o--o <-- origin
         \        \
          a--b--c--m <-- mywork
 
-... second IF we use instead:   git rebase origin
+... second IF we use rebasing instead:   git rebase origin
 o--o--O--o--o--o <-- origin
                  \
                   a'--b'--c' <-- mywork
@@ -131,4 +132,19 @@ while [ $n -lt 5 ] ; do
 done
 --
 
-bare repository? Are e.g. BitBucket and GitHub repos bare repositories? Maybe not as people can (maybe shouldn't, but can) edit locally in GitHub too.
+bare repository? Are e.g. BitBucket and GitHub repos bare repositories? Seems so, as push should be only able to a bare repository. (((Though people can (maybe shouldn't, but can) edit locally in GitHub too. MAybe GitHub offers access straight to repo index and not to working files?)))
+
+--
+
+BEWARE: Cloning local repository might lead git using hard links instead of duplicating data (to save disk space). That's good and bad news.  use the --no-hardlinks option if wish totally separate folders.
+
+git://git.kernel.org/pub/scm/git/git.git
+file:///path/to/repo.git
+ssh://user@remotesite.org[:port]/path/to/repo.git
+user@remotesite.org:/path/to/repo.git
+http://remotesite.org/path/to/repo.git
+https://remotesite.org/path/to/repo.git
+rsync://remotesite.org/path/to/repo.git
+
+Gerrit review layer before change to upstream:  -2, -1, +1, +2     (No -2 and needs at least one +2)
+ Git + merit = Gerrit?
