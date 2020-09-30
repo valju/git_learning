@@ -5,7 +5,7 @@ First rules about git:
 4. only then immediately create the branch with *git checkout -b category-add-fix-juhani* where the branch name tells which feature is worked on, how and by whom,
 5. then immediately work on it, and,
 6. as soon as possible, (when no errors or problems of any kind exist) , *commit -m "Fix Add Category"*
-7. * git push --set-upstream origin category-add-fix-juhani* to remote (same branch, not master!)
+7. *git push --set-upstream origin category-add-fix-juhani* to remote (same branch, not master!)
 8. and make a pull request in GitHub.com web site from that branch
 9. somebody else must review it (Remember that git merge understands nothing of a) our project b) the programming languages we use. It just tries to guess and merge text lines! You must know the big picture and details of the changes)
 10. after accepted review look at the possible merge conflicts? Resolve if possible.
